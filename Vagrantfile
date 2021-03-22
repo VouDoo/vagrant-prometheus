@@ -16,8 +16,13 @@ Vagrant.configure("2") do |config|
     end
     prometheus.vm.network "private_network", ip: "192.168.77.10"
     prometheus.vm.network "forwarded_port", guest: 9090, host: 19090
-    prometheus.vm.provision "file", source: "files/prometheus.yml", destination: "./prometheus.yml"
     prometheus.vm.provision "shell", path: "scripts/install-prometheus.sh"
+    prometheus.vm.provision "file", source: "files/prometheus.yml", destination: "/tmp/prometheus.yml"
+    prometheus.vm.provision "shell", inline: <<-SHELL
+      mv /tmp/prometheus.yml /opt/prometheus/prometheus.yml
+      chown prometheus:prometheus /opt/prometheus/prometheus.yml
+      kill -1 $(pidof prometheus)
+    SHELL
   end
   config.vm.define "grafana" do |grafana|
     grafana.vm.box = selected_box

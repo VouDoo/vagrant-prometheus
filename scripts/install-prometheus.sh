@@ -4,7 +4,6 @@ useradd -rs /bin/false prometheus
 curl -LO https://github.com/prometheus/prometheus/releases/download/v${version}/prometheus-${version}.linux-amd64.tar.gz
 mkdir -p /opt/prometheus/data
 tar -xzf prometheus-${version}.linux-amd64.tar.gz -C /opt/prometheus --strip 1
-mv ./prometheus.yml /opt/prometheus/  # move configuration file imported by Vagrant
 chown prometheus:prometheus -R /opt/prometheus
 
 cat > /etc/systemd/system/prometheus.service << EOL
