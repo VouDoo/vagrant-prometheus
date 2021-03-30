@@ -6,7 +6,7 @@ mkdir -p /opt/prometheus/data
 tar -xzf prometheus-${version}.linux-amd64.tar.gz -C /opt/prometheus --strip 1
 chown prometheus:prometheus -R /opt/prometheus
 
-cat > /etc/systemd/system/prometheus.service << EOL
+cat > /etc/systemd/system/prometheus.service << EOF
 [Unit]
 Description=Prometheus
 Wants=network-online.target
@@ -27,7 +27,7 @@ ExecStart=/opt/prometheus/prometheus \
 
 [Install]
 WantedBy=multi-user.target
-EOL
+EOF
 
 systemctl daemon-reload
 systemctl enable prometheus

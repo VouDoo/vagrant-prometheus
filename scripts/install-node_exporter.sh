@@ -6,7 +6,7 @@ mkdir -p /opt/node_exporter
 tar -xzf node_exporter-${version}.linux-amd64.tar.gz -C /opt/node_exporter --strip 1
 chown node_exporter:node_exporter -R /opt/node_exporter
 
-cat > /etc/systemd/system/node_exporter.service << EOL
+cat > /etc/systemd/system/node_exporter.service << EOF
 [Unit]
 Description=Node Exporter
 Wants=network-online.target
@@ -20,7 +20,7 @@ ExecStart=/opt/node_exporter/node_exporter
 
 [Install]
 WantedBy=multi-user.target
-EOL
+EOF
 
 systemctl daemon-reload
 systemctl enable node_exporter
