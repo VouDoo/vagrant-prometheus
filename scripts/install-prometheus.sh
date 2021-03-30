@@ -19,7 +19,7 @@ Type=simple
 ExecStart=/opt/prometheus/prometheus \
     --config.file /opt/prometheus/prometheus.yml \
     --web.console.templates=/opt/prometheus/consoles/ \
-    --web.console.libraries=/etc/prometheus/console_libraries/ \
+    --web.console.libraries=/opt/prometheus/console_libraries/ \
     --storage.tsdb.path /opt/prometheus/data/ \
     --storage.tsdb.retention.time=2d \
     --storage.tsdb.wal-compression \
