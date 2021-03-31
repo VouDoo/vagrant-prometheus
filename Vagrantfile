@@ -19,6 +19,7 @@
 # Use the following command to spin up the boxes:
 #   vagrant up
 
+
 vbox_group = "prometheus"
 
 Vagrant.configure("2") do |config|
