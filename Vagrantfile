@@ -1,12 +1,29 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-selected_box = "centos/7"
-vbox_group   = "promlab"
+
+# Vagrantfile
+#
+# DESCRIPTION
+# ~~~~~~~~~~~
+# Deploy a Prometheus environment
+# Grafana can be used to create dashboards from metrics collected by Prometheus
+#
+# NOTES
+# ~~~~~
+# This Vagrantfile uses VirtualBox as provider
+# Make sure that VirtualBox is installed on your machine
+# To install it, please visit the official Website:
+#   https://www.virtualbox.org/wiki/Downloads
+#
+# Use the following command to spin up the boxes:
+#   vagrant up
+
+vbox_group = "prometheus"
 
 Vagrant.configure("2") do |config|
   config.vm.define "prometheus" do |prometheus|
-    prometheus.vm.box = selected_box
+    prometheus.vm.box = "centos/7"
     prometheus.vm.hostname = "prometheus"
     prometheus.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "prometheus"
@@ -25,7 +42,7 @@ Vagrant.configure("2") do |config|
     SHELL
   end
   config.vm.define "grafana" do |grafana|
-    grafana.vm.box = selected_box
+    grafana.vm.box = "centos/7"
     grafana.vm.hostname = "grafana"
     grafana.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "grafana"
@@ -38,7 +55,7 @@ Vagrant.configure("2") do |config|
     grafana.vm.provision "shell", path: "scripts/install-grafana.sh"
   end
   config.vm.define "node" do |node|
-    node.vm.box = selected_box
+    node.vm.box = "centos/7"
     node.vm.hostname = "node"
     node.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "node"
